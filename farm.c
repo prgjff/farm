@@ -131,7 +131,11 @@ int main(int argc, char *argv[])
 		heater(heaterActive);
 
 		fflush(stdout);
+		#ifdef __unix__
+		sleep(timeDelay * 60);
+		#else
 		Sleep(timeDelay * 60 * 1000);
+		#endif
 	}
 	return 0;
 }
