@@ -14,7 +14,7 @@
 #include "locking.h"
 
 #define MAXTIMINGS 85
-#define MAX_MEASURE 5;
+#define MAX_MEASURE 5
 
 struct measure
 {
@@ -164,12 +164,10 @@ static char read_dht22_dat(struct measure *m)
 
     m->temp = t;
     m->humidity = h;
-    printf("Humidity = %.2f %% Temperature = %.2f *C \n", h, t );
     result = 1;
   }
   else
   {
-    printf("Data not good, skip\n");
     result = 0;
   }
 
@@ -184,7 +182,7 @@ struct measure getMeasure()
 	int indexMeasure = 0;
 	struct measure result;
 
-	while (read_dht22_dat() == 0) && (indexMeasure < MAX_MEASURE)
+	while ((read_dht22_dat(&result) == 0) && (indexMeasure < MAX_MEASURE))
   {
      delay(1000); // wait 1sec to refresh
      indexMeasure++;
