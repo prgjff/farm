@@ -25,7 +25,9 @@ struct measure
 	float Tmin = -100;
 	float Tmax = -100;
 	int timeDelay = -1;
-	static int DHTPIN = 7;	
+	static int DHTPIN = 7;
+	static int RELAY1PIN = 8;
+	static int RELAY2PIN = 9;
 
 void printHelp(void)
 {
@@ -80,10 +82,18 @@ void prepareArgs(int argc, char *argv[])
 
 void heater(char active)
 {
-	if (active)
+        wiringPiSetup();
+        pinMode(RELAY1PIN, OUTPUT);
+	pinMode(RELAY2PIN, OUTPUT);
+        if (active){
+        	digitalWrite(RELAY1PIN, LOW);
+                digitalWrite(RELAY2PIN, LOW);
 		printf("Обогрев включен\n");
-	else
+        }else{
+		digitalWrite(RELAY1PIN, HIGH);
+		digitalWrite(RELAY2PIN, HIGH);
 		printf("Обогрев выключен\n");
+	}
 }
 
 static uint8_t sizecvt(const int read)
