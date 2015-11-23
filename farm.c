@@ -14,7 +14,7 @@
 #include "locking.h"
 
 #define MAXTIMINGS 85
-#define MAX_MEASURE 5
+#define MAX_MEASURE 10
 
 struct measure
 {
@@ -193,10 +193,10 @@ struct measure getMeasure()
 	struct measure result;
 
 	while ((read_dht22_dat(&result) == 0) && (indexMeasure < MAX_MEASURE))
-  {
-     delay(1000); // wait 1sec to refresh
-     indexMeasure++;
-  }
+	{
+		delay(2000); // wait 2sec to refresh
+		indexMeasure++;
+	}
 
 	//result.temp = 10;
 	//result.humidity = 25.5;
